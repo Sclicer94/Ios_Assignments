@@ -11,7 +11,17 @@ import SwiftUI
 struct Assignment9App: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView{
+                Tab("TV Shows", systemImage: "tv"){
+                    ContentView()
+                }
+                Tab("Main Screen", systemImage: "person"){
+                    MainView()
+                }
+            }
         }
     }
 }
+
+
+
