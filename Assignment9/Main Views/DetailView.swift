@@ -9,16 +9,20 @@ import SwiftUI
 
 
 struct DetailView: View {
-    var show: Show
+    @ObservedObject var showStore: ShowStore
     
+    var show: Show
+    //MARK: - State properties
+    @State private var isAlertShowing = false
+    
+    //MARK: - Body
     var body: some View {
         ZStack {
-            Color("detailBG")
+            Color("detailBg")
                 .ignoresSafeArea()
             ScrollView {
                 VStack{
                     ZStack(alignment: .topLeading){
-                        
                         VStack(alignment: .leading){
                             ZStack {
                                 Color("detailIBG")
@@ -32,9 +36,9 @@ struct DetailView: View {
                                     .bold()
                                     .font(.title)
                             }
-                            if (show.trackExplicitness == "Explicit") {
+                            if (show.contentAdvisoryRating == "TV-MA") {
                                 Image(systemName: "18.circle")
-                            } else if (show.trackExplicitness == "notExplicit") {
+                            } else  {
                                 Image(systemName: "figure.and.child.holdinghands")
                             }
                             
@@ -45,17 +49,27 @@ struct DetailView: View {
                         }.padding()
                     }
                     
-                    
+                   
                     Divider()
                     
                     NavigationLink(destination: WebView(webText: show.collectionViewUrl)){
                         Label("More Information", systemImage: "tv")
                     }
-                    
-                    
-                    
+                    .toolbar{
+                        ToolbarItem{
+                            Button("Add to Watch List", systemImage: showStore.isInCollection(show: show) ? "star.fill" : "star"){
+                                isAlertShowing.toggle()
+                            }
+                        }
+                    }
+                    .alert("Add \(show.trackName) to Watchlist", isPresented: $isAlertShowing){
+                        Button("Add"){
+                            showStore.addToWatchlist(show: show)
+                        }
+                        Button("Cancel", role: .cancel){}
+                    }
                 }.padding()
-                //                .navigationTitle("\(campsite.name)")
+
                 Spacer()
             }
         }
@@ -64,5 +78,5 @@ struct DetailView: View {
 }
 
 #Preview {
-    DetailView(show: Show.show)
+    DetailView(showStore: ShowStore.exampleShow, show: Show.show)
 }

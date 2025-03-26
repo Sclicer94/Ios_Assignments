@@ -30,7 +30,7 @@ struct ContentView: View {
             }
             .navigationTitle("TV Shows")
             .navigationDestination(for: Show.self) { show in
-                DetailView(show: show)
+                DetailView(showStore: ShowStore.exampleShow, show: show)
             }
             .onAppear() {
                 loadData(forShowTitle: searchText)

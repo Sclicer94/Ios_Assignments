@@ -9,15 +9,20 @@ import SwiftUI
 
 @main
 struct Assignment9App: App {
+    @StateObject private var showStore = ShowStore(favouriteShows: [])
+    
     var body: some Scene {
         WindowGroup {
             TabView{
                 Tab("TV Shows", systemImage: "tv"){
                     ContentView()
                 }
-                Tab("Main Screen", systemImage: "person"){
-                    MainView()
-                }
+                Tab("WatchList", systemImage: "star"){
+                    WatchlistView(showStore: ShowStore.exampleShow)
+                }.badge(showStore.favouriteShows.count)
+                
+            }.onAppear(){
+                showStore.retrieveWatchlist()
             }
         }
     }

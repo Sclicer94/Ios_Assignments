@@ -21,7 +21,7 @@ class Show: Codable, Hashable, Identifiable {
             longDescription: "Rick moves in with his daughter's family and establishes himself as a bad influence on his grandson, Morty.",
             artworkUrl100: "https://is1-ssl.mzstatic.com/image/thumb/Video113/v4/74/30/fd/7430fd41-956d-349f-fa2e-3e627623b6dd/pr_source.png/100x100bb.jpg",
             collectionViewUrl: "https://itunes.apple.com/us/tv-season/pilot/id741096885?i=756852895&uo=4",
-            trackExplicitness: "notExplicit"
+            contentAdvisoryRating:"TV-MA"
         )
         
         static func == (lhs: Show, rhs: Show) -> Bool {
@@ -39,18 +39,18 @@ class Show: Codable, Hashable, Identifiable {
         var longDescription: String
         var artworkUrl100: String
         var collectionViewUrl: String?
-        var trackExplicitness: String
+        var contentAdvisoryRating: String
 
-        init(trackId: Int, artistName: String, trackName: String, shortDescription: String, longDescription: String, artworkUrl100: String, collectionViewUrl: String? = nil, trackExplicitness: String) {
-            self.trackId = trackId
-            self.artistName = artistName
-            self.trackName = trackName
-            self.shortDescription = shortDescription
-            self.longDescription = longDescription
-            self.artworkUrl100 = artworkUrl100
-            self.collectionViewUrl = collectionViewUrl
-            self.trackExplicitness = trackExplicitness
-        }
+    init(trackId: Int, artistName: String, trackName: String, shortDescription: String, longDescription: String, artworkUrl100: String, collectionViewUrl: String? = nil, contentAdvisoryRating: String) {
+        self.trackId = trackId
+        self.artistName = artistName
+        self.trackName = trackName
+        self.shortDescription = shortDescription
+        self.longDescription = longDescription
+        self.artworkUrl100 = artworkUrl100
+        self.collectionViewUrl = collectionViewUrl
+        self.contentAdvisoryRating = contentAdvisoryRating
+    }
     }
 
 extension Bundle {
